@@ -56,6 +56,9 @@ dependencies {
 	localRuntime("org.lwjgl:lwjgl-openal::$lwjglNatives")
 	localRuntime("org.lwjgl:lwjgl-opengl::$lwjglNatives")
 	localRuntime("org.lwjgl:lwjgl-stb::$lwjglNatives")
+
+	compileOnly (files("libs/vintagequesting-2.0.0-beta.1.jar"))
+	compileOnly (files("libs/catalyst-core-3.0.5.jar"))
 }
 java {
 	toolchain {

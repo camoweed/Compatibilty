@@ -1,11 +1,11 @@
 {
 	"schemaVersion": 1,
-	"id": "examplemod",
+	"id": "campatibility",
 	"version": "${version}",
-	"name": "Example Mod",
-	"description": "This mod aims to help new BTA modders.",
+	"name": "Campatibilty",
+	"description": "Extra optional mod support for BTA! mods.",
 	"authors": [
-		"Turnip Labs"
+		"camoweed_"
 	],
 	"contact": {
 		"homepage": "",
@@ -16,11 +16,14 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"turniplabs.examplemod.ExampleMod"
+          "camoweed.campatibility.Campatibility"
+		],
+		"vintagequesting": [
+			"camoweed.campatibility.api.impl.vintagequesting.VintageQuestingCampatPlugin"
 		]
 	},
 	"mixins": [
-		"examplemod.mixins.json"
+      "campatibility.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=${fabricloader}",
@@ -28,6 +31,7 @@
 		"java": ">=${java}"
 	},
 	"suggests": {
-		"modmenu": ">=${modmenu}"
+		"modmenu": ">=${modmenu}",
+		"vintage-questing": "*"
 	}
 }
