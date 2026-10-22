@@ -1,6 +1,7 @@
 package camoweed.campatibility;
 
 import camoweed.campatibility.api.impl.vintagequesting.VintageQuestingCampatPlugin;
+import camoweed.campatibility.api.impl.vintagequesting.VintageQuestingRoseToolsPlugin;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ public class Campatibility implements ModInitializer {
 		if (FabricLoader.getInstance().isModLoaded("catalyst-core")) {
 			LOGGER.info("☑ Catalyst is active!");
 		}
+
 		else { LOGGER.info("⚠ No mods are active"); }
 	}
 
@@ -32,6 +34,10 @@ public class Campatibility implements ModInitializer {
 		if (FabricLoader.getInstance().isModLoaded("vintagequesting")) {
 			LOGGER.info("☑ Vintage Questing is active!");
 			new VintageQuestingCampatPlugin().reloadClient();
+		}
+		if (FabricLoader.getInstance().isModLoaded("rosesword")) {
+			LOGGER.info("☑ Rose Tools is active!");
+			new VintageQuestingRoseToolsPlugin().reloadClient();
 		}
 	}
 }

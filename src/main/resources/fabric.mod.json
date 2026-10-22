@@ -19,7 +19,8 @@
           "camoweed.campatibility.Campatibility"
 		],
 		"vintagequesting": [
-			"camoweed.campatibility.api.impl.vintagequesting.VintageQuestingCampatPlugin"
+			"camoweed.campatibility.api.impl.vintagequesting.VintageQuestingCampatPlugin",
+			"camoweed.campatibility.api.impl.vintagequesting.VintageQuestingRoseToolsPlugin"
 		]
 	},
 	"mixins": [

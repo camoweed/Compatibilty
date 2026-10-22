@@ -1,5 +1,6 @@
 package camoweed.campatibility.api.impl.vintagequesting;
 import camoweed.campatibility.api.impl.vintagequesting.chapter.EpicQuestChapter;
+import camoweed.campatibility.api.impl.vintagequesting.chapter.RoseToolsQuestChapter;
 import camoweed.campatibility.api.impl.vintagequesting.page.EpicQuestPage;
 import com.llamalad7.mixinextras.lib.antlr.runtime.misc.Pair;
 import net.fabricmc.api.EnvType;
@@ -31,7 +32,7 @@ import static sunsetsatellite.catalyst.Catalyst.zip;
 public class VintageQuestingCampatPlugin implements VQPlugin {
 
 
-	public static ChapterData EPIC_CHAPTER = new EpicQuestChapter();
+	public static ChapterData EPIC_CHAPTER = new EpicQuestChapter()	;
 
 	@Override
 	public void initializePlugin() {
