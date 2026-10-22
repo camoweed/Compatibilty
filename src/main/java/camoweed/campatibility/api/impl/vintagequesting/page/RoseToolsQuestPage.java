@@ -18,7 +18,7 @@ public class RoseToolsQuestPage extends ChapterPage {
 
 	@Override
 	public @Nullable IconCoordinate getBackgroundTile(ScreenQuestbook screenQuestbook, int i, Random random, int i1, int i2) {
-		return TextureRegistry.getTexture(String.valueOf(Blocks.GRASS));
+		return TextureRegistry.getTexture("minecraft:block/dirt");
 	}
 
 	@Override

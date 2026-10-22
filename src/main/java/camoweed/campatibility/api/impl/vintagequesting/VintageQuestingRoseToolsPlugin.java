@@ -1,10 +1,12 @@
 package camoweed.campatibility.api.impl.vintagequesting;
 
+import net.minecraft.core.item.IItemConvertible;
 import camoweed.campatibility.api.impl.vintagequesting.chapter.EpicQuestChapter;
 import camoweed.campatibility.api.impl.vintagequesting.chapter.RoseToolsQuestChapter;
 import camoweed.campatibility.api.impl.vintagequesting.page.EpicQuestPage;
 import camoweed.campatibility.api.impl.vintagequesting.page.RoseToolsQuestPage;
-import com.llamalad7.mixinextras.lib.antlr.runtime.misc.Pair;
+import net.minecraft.core.util.collection.Pair;
+//import com.llamalad7.mixinextras.lib.antlr.runtime.misc.Pair;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.block.Block;
@@ -19,11 +21,14 @@ import sunsetsatellite.vintagequesting.core.data.ChapterData;
 import sunsetsatellite.vintagequesting.core.data.QuestData;
 import sunsetsatellite.vintagequesting.core.data.RewardData;
 import sunsetsatellite.vintagequesting.core.data.TaskData;
+import sunsetsatellite.vintagequesting.core.data.reward.ItemRewardData;
 import sunsetsatellite.vintagequesting.core.data.task.ClickTaskData;
 import sunsetsatellite.vintagequesting.core.data.task.RetrievalTaskData;
+import sunsetsatellite.vintagequesting.core.data.task.VisitDimensionTaskData;
 import sunsetsatellite.vintagequesting.util.Logic;
 import sunsetsatellite.vintagequesting.util.QuestTeam;
 import sunsetsatellite.vintagequesting.util.VQPlugin;
+//import com.llamalad7.mixinextras.lib.antlr.runtime.misc.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,18 +63,26 @@ public class VintageQuestingRoseToolsPlugin implements VQPlugin {
 	public static List<QuestData> addRoseToolsQuests() {
 		QuestData starter = new QuestData("rosesword:starter", "quest.rosesword.starter", Blocks.FLOWER_RED, Logic.AND, Logic.AND)
 			.setTasks(listOf(new ClickTaskData("rosesword:starter/click")));
-		/* graahahaha
-		QuestData algae = simpleQuest("algae", ,
+		QuestData algae = simpleQuest("algae", Blocks.ALGAE,
 			zip(listOf("retrieval"),
 				listOf(
 					new ItemStack(Blocks.ALGAE, 4)
 				)),
+			listOf(),
 			listOf(starter), starter,
 			0,
 			1);
-			*/
-
-		return listOf(starter);}
+		/*QuestData algae = simpleQuest("algae", Blocks.ALGAE,
+			zip(listOf("retrieval"),
+				listOf(
+					new ItemStack(Blocks.ALGAE, 4)
+				)),
+			,
+			listOf(starter), starter,
+			0,
+			1);
+		 */
+		return listOf(starter, algae);}
 	public static QuestData simpleQuest(
 		String id,
 		IItemConvertible icon,
@@ -82,11 +95,11 @@ public class VintageQuestingRoseToolsPlugin implements VQPlugin {
 	) {
 		List<TaskData> retrievalTasks = new ArrayList<>();
 		for (Pair<String, ItemStack> task : tasks) {
-			//retrievalTasks.add(new RetrievalTaskData("rosesword:" + id + "/" + task.getLeft(), task.getRight()));
+			retrievalTasks.add(new RetrievalTaskData("rosesword:" + id + "/" + task.getLeft(), task.getRight()));
 		}
 		List<RewardData> itemRewards = new ArrayList<>();
 		for (Pair<String, ItemStack> reward : rewards) {
-			//itemRewards.add(new ItemRewardData("minecraft:" + id + "/" + reward.getLeft(), reward.getRight()));
+			itemRewards.add(new ItemRewardData("rosesword:" + id + "/" + reward.getLeft(), reward.getRight()));
 		}
 		return new QuestData("rosesword:" + id, "quest.rosesword." + id, icon, Logic.AND, Logic.AND)
 			.setPreRequisites(preRequisites)
