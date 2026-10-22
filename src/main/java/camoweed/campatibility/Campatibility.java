@@ -33,7 +33,7 @@ public class Campatibility implements ModInitializer {
 	public void afterGameStart() {
 		if (FabricLoader.getInstance().isModLoaded("vintagequesting")) {
 			LOGGER.info("☑ Vintage Questing is active!");
-			new VintageQuestingCampatPlugin().reloadClient();
+			//new VintageQuestingCampatPlugin().reloadClient();
 		}
 		if (FabricLoader.getInstance().isModLoaded("rosesword")) {
 			LOGGER.info("☑ Rose Tools is active!");

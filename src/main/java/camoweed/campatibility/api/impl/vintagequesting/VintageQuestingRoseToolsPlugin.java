@@ -37,6 +37,8 @@ import java.util.UUID;
 import static sunsetsatellite.catalyst.Catalyst.listOf;
 import static sunsetsatellite.catalyst.Catalyst.zip;
 
+import camoweed.rosesword.*;
+
 public class VintageQuestingRoseToolsPlugin implements VQPlugin {
 
 	public static ChapterData ROSE_TOOLS_CHAPTER = new RoseToolsQuestChapter()	;
@@ -61,28 +63,58 @@ public class VintageQuestingRoseToolsPlugin implements VQPlugin {
 		VintageQuestingClient.CHAPTER_PAGES.register(ROSE_TOOLS_CHAPTER.getId(), new RoseToolsQuestPage(new Chapter(ROSE_TOOLS_CHAPTER, new QuestTeam("null", UUID.randomUUID()))));
 	}
 	public static List<QuestData> addRoseToolsQuests() {
-		QuestData starter = new QuestData("rosesword:starter", "quest.rosesword.starter", Blocks.FLOWER_RED, Logic.AND, Logic.AND)
+		QuestData starter = new QuestData("rosesword:starter", "quest.rosesword.starter", Blocks.MOSS_BASALT, Logic.AND, Logic.AND)
 			.setTasks(listOf(new ClickTaskData("rosesword:starter/click")));
+		QuestData rose = simpleQuest("rose", Blocks.FLOWER_RED,
+			zip(listOf("retrieval"),
+				listOf(
+					new ItemStack(Blocks.FLOWER_RED, 2)
+				)),
+			zip(listOf("reward"), listOf(new ItemStack(Blocks.FLOWER_RED, 2))),
+			listOf(starter), starter,
+			0,
+			2);
 		QuestData algae = simpleQuest("algae", Blocks.ALGAE,
 			zip(listOf("retrieval"),
 				listOf(
 					new ItemStack(Blocks.ALGAE, 4)
 				)),
-			listOf(),
-			listOf(starter), starter,
-			0,
+			zip(listOf("reward"), listOf(new ItemStack(Blocks.ALGAE, 4))),
+			listOf(rose), rose,
+			1,
 			1);
-		/*QuestData algae = simpleQuest("algae", Blocks.ALGAE,
+		QuestData steel = simpleQuest("steel", Items.INGOT_STEEL,
 			zip(listOf("retrieval"),
 				listOf(
-					new ItemStack(Blocks.ALGAE, 4)
+					new ItemStack(Items.INGOT_STEEL, 2)
 				)),
-			,
-			listOf(starter), starter,
-			0,
+			zip(listOf("reward"), listOf(new ItemStack(Items.INGOT_STEEL, 2))),
+			listOf(algae), rose,
+			-1,
 			1);
-		 */
-		return listOf(starter, algae);}
+		QuestData pickaxe = simpleQuest("pickaxe", ModItems.rosePick,
+			zip(listOf("retrieval"),
+				listOf(
+					new ItemStack(ModItems.rosePick, 1)
+				)),
+			listOf(),
+			listOf(rose), steel,
+			1,
+			2);
+		QuestData axe = simpleQuest("axe", ModItems.roseAxe,
+			zip(listOf("retrieval"), listOf(new ItemStack(ModItems.roseAxe, 1))),listOf(),listOf(pickaxe), pickaxe, 2, 0);
+		QuestData sword = simpleQuest("sword", ModItems.roseSword,
+			zip(listOf("retrieval"), listOf(new ItemStack(ModItems.roseSword, 1))),listOf(),listOf(pickaxe), pickaxe, -2, 0);
+		QuestData helmet = simpleQuest("helmet", ModItems.roseHelm,
+			zip(listOf("retrieval"), listOf(new ItemStack(ModItems.roseHelm, 1))),listOf(),listOf(pickaxe), pickaxe, 0, 2);
+		QuestData chestplate = simpleQuest("chestplate", ModItems.roseChest,
+			zip(listOf("retrieval"), listOf(new ItemStack(ModItems.roseChest, 1))),listOf(),listOf(pickaxe), pickaxe, 0, 3);
+		QuestData pants = simpleQuest("pants", ModItems.rosePants,
+			zip(listOf("retrieval"), listOf(new ItemStack(ModItems.rosePants, 1))),listOf(),listOf(pickaxe), pickaxe, 0, 4);
+		QuestData boots = simpleQuest("boots", ModItems.roseBoots,
+			zip(listOf("retrieval"), listOf(new ItemStack(ModItems.roseBoots, 1))),listOf(),listOf(pickaxe), pickaxe, 0, 5);
+
+		return listOf(starter, rose, algae, steel, pickaxe, axe, sword, helmet, chestplate, pants, boots);}
 	public static QuestData simpleQuest(
 		String id,
 		IItemConvertible icon,

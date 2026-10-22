@@ -45,7 +45,7 @@ public class VintageQuestingCampatPlugin implements VQPlugin {
 
 	@Override
 	public boolean shouldLoad() {
-		return true;
+		return false;
 	}
 	@Environment(EnvType.CLIENT)
 	public void reloadClient() {

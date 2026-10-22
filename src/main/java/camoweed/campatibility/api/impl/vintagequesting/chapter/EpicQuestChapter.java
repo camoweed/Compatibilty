@@ -9,7 +9,7 @@ import sunsetsatellite.vintagequesting.core.data.QuestData;
 
 public class EpicQuestChapter extends ChapterData {
 	public EpicQuestChapter() {
-		super("minecraft:epic", 0);
+		super("minecraft:epic", 99);
 	}
 	@Override
 	public @NotNull String getName() {
@@ -28,6 +28,7 @@ public class EpicQuestChapter extends ChapterData {
 
 	@Override
 	public QuestData getStartingQuest() {
-		return VintageQuestingCampatPlugin.getQuest("welcome");
+		return null;
+		//return VintageQuestingCampatPlugin.getQuest("welcome");
 	}
 }

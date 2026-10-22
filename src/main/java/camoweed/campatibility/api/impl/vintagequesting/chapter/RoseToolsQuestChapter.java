@@ -10,7 +10,7 @@ import sunsetsatellite.vintagequesting.core.data.QuestData;
 
 public class RoseToolsQuestChapter extends ChapterData {
 	public RoseToolsQuestChapter() {
-		super("rosesword:tutorial", 1);
+		super("rosesword:tutorial", 0);
 	}
 	@Override
 	public @NotNull String getName() {
