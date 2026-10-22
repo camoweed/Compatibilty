@@ -1,7 +1,6 @@
 package camoweed.campatibility.api.impl.vintagequesting.chapter;
 
-import camoweed.campatibility.api.impl.vintagequesting.VintageQuestingCampatPlugin;
-import camoweed.campatibility.api.impl.vintagequesting.VintageQuestingRoseToolsPlugin;
+import camoweed.campatibility.api.impl.vintagequesting.RoseToolsQuests;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -10,7 +9,7 @@ import sunsetsatellite.vintagequesting.core.data.QuestData;
 
 public class RoseToolsQuestChapter extends ChapterData {
 	public RoseToolsQuestChapter() {
-		super("rosesword:tutorial", 0);
+		super("rosesword:tutorial", 1);
 	}
 	@Override
 	public @NotNull String getName() {
@@ -29,6 +28,6 @@ public class RoseToolsQuestChapter extends ChapterData {
 
 	@Override
 	public QuestData getStartingQuest() {
-		return VintageQuestingRoseToolsPlugin.getQuest("starter");
+		return RoseToolsQuests.getQuest("starter");
 	}
 }

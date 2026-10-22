@@ -1,17 +1,12 @@
 package camoweed.campatibility.api.impl.vintagequesting;
 
 import net.minecraft.core.item.IItemConvertible;
-import camoweed.campatibility.api.impl.vintagequesting.chapter.EpicQuestChapter;
 import camoweed.campatibility.api.impl.vintagequesting.chapter.RoseToolsQuestChapter;
-import camoweed.campatibility.api.impl.vintagequesting.page.EpicQuestPage;
 import camoweed.campatibility.api.impl.vintagequesting.page.RoseToolsQuestPage;
 import net.minecraft.core.util.collection.Pair;
-//import com.llamalad7.mixinextras.lib.antlr.runtime.misc.Pair;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.core.block.Block;
 import net.minecraft.core.block.Blocks;
-import net.minecraft.core.item.IItemConvertible;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
 import sunsetsatellite.vintagequesting.VintageQuesting;
@@ -24,11 +19,9 @@ import sunsetsatellite.vintagequesting.core.data.TaskData;
 import sunsetsatellite.vintagequesting.core.data.reward.ItemRewardData;
 import sunsetsatellite.vintagequesting.core.data.task.ClickTaskData;
 import sunsetsatellite.vintagequesting.core.data.task.RetrievalTaskData;
-import sunsetsatellite.vintagequesting.core.data.task.VisitDimensionTaskData;
 import sunsetsatellite.vintagequesting.util.Logic;
 import sunsetsatellite.vintagequesting.util.QuestTeam;
 import sunsetsatellite.vintagequesting.util.VQPlugin;
-//import com.llamalad7.mixinextras.lib.antlr.runtime.misc.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +32,7 @@ import static sunsetsatellite.catalyst.Catalyst.zip;
 
 import camoweed.rosesword.*;
 
-public class VintageQuestingRoseToolsPlugin implements VQPlugin {
+public class RoseToolsQuests implements VQPlugin {
 
 	public static ChapterData ROSE_TOOLS_CHAPTER = new RoseToolsQuestChapter()	;
 
@@ -53,9 +46,8 @@ public class VintageQuestingRoseToolsPlugin implements VQPlugin {
 	}
 
 	@Override
-	public boolean shouldLoad() {
-		return true;
-	}
+	public boolean shouldLoad() {return true;}
+
 	@Environment(EnvType.CLIENT)
 	public void reloadClient() {
 		VintageQuestingClient.CHAPTER_PAGES.unregister(ROSE_TOOLS_CHAPTER.getId());

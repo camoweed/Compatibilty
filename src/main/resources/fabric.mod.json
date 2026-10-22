@@ -19,7 +19,9 @@
           "camoweed.campatibility.Campatibility"
 		],
 		"vintagequesting": [
-			"camoweed.campatibility.api.impl.vintagequesting.VintageQuestingRoseToolsPlugin"
+			"camoweed.campatibility.api.impl.vintagequesting.RoseToolsQuests",
+			"camoweed.campatibility.api.impl.vintagequesting.BTFishingQuests"
+
 		]
 	},
 	"mixins": [
