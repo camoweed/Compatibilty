@@ -3,6 +3,7 @@ package camoweed.campatibility;
 import camoweed.campatibility.api.impl.vintagequesting.BTFishingQuests;
 import camoweed.campatibility.api.impl.vintagequesting.DefaultQuest;
 import camoweed.campatibility.api.impl.vintagequesting.RoseToolsQuests;
+import camoweed.campatibility.api.impl.vintagequesting.StardewQuests;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
@@ -21,21 +22,26 @@ public class Campatibility implements ModInitializer {
 	boolean quests = FabricLoader.getInstance().isModLoaded("vintagequesting");
 	boolean roseTools = FabricLoader.getInstance().isModLoaded("rosesword");
 	boolean btfishing = FabricLoader.getInstance().isModLoaded("btf");
+	boolean stardew = FabricLoader.getInstance().isModLoaded("stardew");
 
 	Key KEY = Key.of(MOD_ID);
 	public static final boolean RoseToolQuests;
 	public static final boolean BTFishingQuests;
+	public static final boolean StarwdewFarmingQuests;
+
 	public static final TomlConfigHandler CFG;
 	static {
 		Toml cfg = new Toml();
 		cfg.addCategory("Quests");
 		cfg.addEntry("Quests.RoseTools", "Quests for Rose Tools", true);
 		cfg.addEntry("Quests.BTFishing", "Quests for Better than Fishing", true);
+		cfg.addEntry("Quests.StardewFarming", "Quests for Stardew Farming", true);
 
 		CFG = new TomlConfigHandler(MOD_ID, cfg);
 
 		RoseToolQuests = CFG.getBoolean("Quests.RoseTools");
 		BTFishingQuests = CFG.getBoolean("Quests.BTFishing");
+		StarwdewFarmingQuests = CFG.getBoolean("Quests.StardewFarming");
 	}
 
 	@Override
@@ -46,12 +52,19 @@ public class Campatibility implements ModInitializer {
 	public void beforeGameStart() {}
 	public void afterGameStart() {
 		if (quests) {LOGGER.info("☑ Vintage Questing is active!");
-			boolean btfActive = false;
 			boolean roseToolsActive = false;
-			if (btfishing && BTFishingQuests) {LOGGER.info("☑ Better than Fishing is active!");BTFishingLoaded.init(); btfActive = true;}
+			boolean btfActive = false;
+			boolean stardewActive = false;
 			if (roseTools && RoseToolQuests) {LOGGER.info("☑ Rose Tools is active!");RoseToolsLoaded.init(); roseToolsActive = true;}
-			if(!btfActive && !roseToolsActive) {LOGGER.info("⚠ No modded quests active");new DefaultQuest().reloadClient();}
+			if (btfishing && BTFishingQuests) {LOGGER.info("☑ Better than Fishing is active!");BTFishingLoaded.init(); btfActive = true;}
+			if (stardew && StarwdewFarmingQuests) {LOGGER.info("☑ Better than Fishing is active!");StardewLoaded.init(); stardewActive = true;}
+			if(!btfActive && !roseToolsActive && !stardewActive) {LOGGER.info("⚠ No modded quests active");new DefaultQuest().reloadClient();}
 
+		}
+	}
+	private static class RoseToolsLoaded {
+		static void init() {
+			new RoseToolsQuests().reloadClient();
 		}
 	}
 	private static class BTFishingLoaded {
@@ -59,9 +72,9 @@ public class Campatibility implements ModInitializer {
 			new BTFishingQuests().reloadClient();
 		}
 	}
-	private static class RoseToolsLoaded {
+	private static class StardewLoaded {
 		static void init() {
-			new RoseToolsQuests().reloadClient();
+			new StardewQuests().reloadClient();
 		}
 	}
 }

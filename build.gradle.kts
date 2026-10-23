@@ -58,9 +58,11 @@ dependencies {
 	localRuntime("org.lwjgl:lwjgl-stb::$lwjglNatives")
 
 	compileOnly (files("libs/vintagequesting-2.0.0-beta.1.jar"))
+	compileOnly (files("libs/catalyst-all-3.1.6-sources.jar"))
 	compileOnly (files("libs/catalyst-core-3.0.5.jar"))
 	compileOnly (files("libs/rosesword-1.3.3+8.0.1.jar"))
 	compileOnly (files("libs/btf-1.0.4+8.0.1.jar"))
+	compileOnly (files("libs/stardew-3.5.8+8.0.1-sources.jar"))
 }
 java {
 	toolchain {
