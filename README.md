@@ -9,4 +9,6 @@ depending on your modlist you can see different benefits
 ### [Rose Tools](https://github.com/camoweed/rose-tools)
 ☻ full progression walkthrough with vintage questing
 ### [Better than Fishing](https://modrinth.com/mod/betterthanfishing)
+🎣 full progression challenge walkthrough with vintage questing
+### [Stardew Farming](https://github.com/Redart15/stardew-farming-bta)
 ⚠ wip progression walkthrough with vintage questing
