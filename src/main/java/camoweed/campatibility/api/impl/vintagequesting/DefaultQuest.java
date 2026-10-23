@@ -1,7 +1,6 @@
 package camoweed.campatibility.api.impl.vintagequesting;
-import camoweed.campatibility.api.impl.vintagequesting.chapter.EpicQuestChapter;
-import camoweed.campatibility.api.impl.vintagequesting.chapter.RoseToolsQuestChapter;
-import camoweed.campatibility.api.impl.vintagequesting.page.EpicQuestPage;
+import camoweed.campatibility.api.impl.vintagequesting.chapter.DefaultQuestChapter;
+import camoweed.campatibility.api.impl.vintagequesting.page.DefaultQuestPage;
 import com.llamalad7.mixinextras.lib.antlr.runtime.misc.Pair;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -15,9 +14,7 @@ import sunsetsatellite.vintagequesting.core.data.ChapterData;
 import sunsetsatellite.vintagequesting.core.data.QuestData;
 import sunsetsatellite.vintagequesting.core.data.RewardData;
 import sunsetsatellite.vintagequesting.core.data.TaskData;
-import sunsetsatellite.vintagequesting.core.data.reward.ItemRewardData;
 import sunsetsatellite.vintagequesting.core.data.task.ClickTaskData;
-import sunsetsatellite.vintagequesting.core.data.task.RetrievalTaskData;
 import sunsetsatellite.vintagequesting.util.Logic;
 import sunsetsatellite.vintagequesting.util.QuestTeam;
 import sunsetsatellite.vintagequesting.util.VQPlugin;
@@ -27,12 +24,11 @@ import java.util.List;
 import java.util.UUID;
 
 import static sunsetsatellite.catalyst.Catalyst.listOf;
-import static sunsetsatellite.catalyst.Catalyst.zip;
 
-public class VintageQuestingCampatPlugin implements VQPlugin {
+public class DefaultQuest implements VQPlugin {
 
 
-	public static ChapterData EPIC_CHAPTER = new EpicQuestChapter()	;
+	public static ChapterData EPIC_CHAPTER = new DefaultQuestChapter()	;
 
 	@Override
 	public void initializePlugin() {
@@ -45,17 +41,17 @@ public class VintageQuestingCampatPlugin implements VQPlugin {
 
 	@Override
 	public boolean shouldLoad() {
-		return false;
+		return true;
 	}
 	@Environment(EnvType.CLIENT)
 	public void reloadClient() {
 		VintageQuestingClient.CHAPTER_PAGES.unregister(EPIC_CHAPTER.getId());
 
-		VintageQuestingClient.CHAPTER_PAGES.register(EPIC_CHAPTER.getId(), new EpicQuestPage(new Chapter(EPIC_CHAPTER, new QuestTeam("null", UUID.randomUUID()))));
+		VintageQuestingClient.CHAPTER_PAGES.register(EPIC_CHAPTER.getId(), new DefaultQuestPage(new Chapter(EPIC_CHAPTER, new QuestTeam("null", UUID.randomUUID()))));
 	}
 	public static List<QuestData> addEpicQuests() {
-		QuestData welcome = new QuestData("minecraft:welcome", "quest.minecraft.welcome", Items.STICK, Logic.AND, Logic.AND)
-			.setTasks(listOf(new ClickTaskData("minecraft:welcome/click")));
+		QuestData welcome = new QuestData("campatibility:welcome", "quest.campatibility.welcome", Items.STICK, Logic.AND, Logic.AND)
+			.setTasks(listOf(new ClickTaskData("campatibility:welcome/click")));
 
 		return listOf(welcome);}
 	public static QuestData simpleQuest(
@@ -70,13 +66,13 @@ public class VintageQuestingCampatPlugin implements VQPlugin {
 	) {
 		List<TaskData> retrievalTasks = new ArrayList<>();
 		for (Pair<String, ItemStack> task : tasks) {
-			//retrievalTasks.add(new RetrievalTaskData("minecraft:" + id + "/" + task.getLeft(), task.getRight()));
+			//retrievalTasks.add(new RetrievalTaskData("campatibility:" + id + "/" + task.getLeft(), task.getRight()));
 		}
 		List<RewardData> itemRewards = new ArrayList<>();
 		for (Pair<String, ItemStack> reward : rewards) {
-			//itemRewards.add(new ItemRewardData("minecraft:" + id + "/" + reward.getLeft(), reward.getRight()));
+			//itemRewards.add(new ItemRewardData("campatibility:" + id + "/" + reward.getLeft(), reward.getRight()));
 		}
-		return new QuestData("minecraft:" + id, "quest.minecraft." + id, icon, Logic.AND, Logic.AND)
+		return new QuestData("campatibility:" + id, "quest.campatibility." + id, icon, Logic.AND, Logic.AND)
 			.setPreRequisites(preRequisites)
 			.setTasks(retrievalTasks)
 			.setRewards(itemRewards)
@@ -92,14 +88,14 @@ public class VintageQuestingCampatPlugin implements VQPlugin {
 		int xOffset,
 		int yOffset
 	) {
-		return new QuestData("minecraft:" + id, "quest.minecraft." + id, icon, Logic.AND, Logic.AND)
+		return new QuestData("campatibility:" + id, "quest.campatibility." + id, icon, Logic.AND, Logic.AND)
 			.setPreRequisites(preRequisites)
-			.setTasks(listOf(new ClickTaskData("minecraft:" + id + "/click")))
+			.setTasks(listOf(new ClickTaskData("campatibility:" + id + "/click")))
 			.setX(offsetQuest, xOffset)
 			.setY(offsetQuest, yOffset);
 	}
 	public static QuestData getQuest(String id) {
-		QuestData item = VintageQuesting.QUESTS.getItem("minecraft:" + id);
+		QuestData item = VintageQuesting.QUESTS.getItem("campatibility:" + id);
 		if (item == null) {
 			throw new NullPointerException("Quest " + id + " not found!");
 		}

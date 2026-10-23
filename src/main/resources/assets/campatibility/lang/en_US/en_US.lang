@@ -20,7 +20,8 @@ quest.rosesword.pants.name=§p§eRose§r Leggings
 quest.rosesword.pants.desc=All rose tier amour have high falling protection.
 quest.rosesword.boots.name=§p§eRose§r Boots
 quest.rosesword.boots.desc=All rose tier amour have high falling protection.
-
+quest.campatibility.welcome.name=Install more mods!
+quest.campatibility.welcome.desc=No compatible mods found for quests ☹! Consider installing mods such as Signal Industries, Rose Tools, Better than Fishing.
 quest.btf.begin.name=Fishing Expanded!
 quest.btf.begin.desc=§+ Better than Fishing adds in many varieties of fish and fish accessories. These questlines will challenge you to catch and obtain them all. §+§8Click the §-❌§+§8 to confirm.§-
 quest.btf.rodUpgradeIron.name=Tools of the trade

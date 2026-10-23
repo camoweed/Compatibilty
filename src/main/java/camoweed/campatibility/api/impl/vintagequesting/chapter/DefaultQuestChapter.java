@@ -1,24 +1,24 @@
 package camoweed.campatibility.api.impl.vintagequesting.chapter;
 
-import camoweed.campatibility.api.impl.vintagequesting.VintageQuestingCampatPlugin;
+import camoweed.campatibility.api.impl.vintagequesting.DefaultQuest;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import sunsetsatellite.vintagequesting.core.data.ChapterData;
 import sunsetsatellite.vintagequesting.core.data.QuestData;
 
-public class EpicQuestChapter extends ChapterData {
-	public EpicQuestChapter() {
+public class DefaultQuestChapter extends ChapterData {
+	public DefaultQuestChapter() {
 		super("minecraft:epic", 99);
 	}
 	@Override
 	public @NotNull String getName() {
-		return "epic";
+		return "No quest mods!";
 	}
 
 	@Override
 	public @NotNull String getDescription() {
-		return "truely epic";
+		return "☹";
 	}
 
 	@Override
@@ -28,7 +28,6 @@ public class EpicQuestChapter extends ChapterData {
 
 	@Override
 	public QuestData getStartingQuest() {
-		return null;
-		//return VintageQuestingCampatPlugin.getQuest("welcome");
+		return DefaultQuest.getQuest("welcome");
 	}
 }

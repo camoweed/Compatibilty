@@ -4,7 +4,6 @@ package camoweed.campatibility.api.impl.vintagequesting.page;
 import net.minecraft.client.render.texture.stitcher.IconCoordinate;
 import net.minecraft.client.render.texture.stitcher.TextureRegistry;
 import net.minecraft.core.block.Blocks;
-import net.minecraft.core.util.helper.Side;
 import org.jetbrains.annotations.Nullable;
 import sunsetsatellite.vintagequesting.client.gui.ChapterPage;
 import sunsetsatellite.vintagequesting.client.gui.ScreenQuestbook;
@@ -12,8 +11,8 @@ import sunsetsatellite.vintagequesting.core.Chapter;
 
 import java.util.Random;
 
-public class EpicQuestPage extends ChapterPage {
-	public EpicQuestPage(Chapter chapter) {
+public class DefaultQuestPage extends ChapterPage {
+	public DefaultQuestPage(Chapter chapter) {
 		super(chapter);
 	}
 

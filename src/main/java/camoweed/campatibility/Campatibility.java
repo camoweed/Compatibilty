@@ -1,6 +1,7 @@
 package camoweed.campatibility;
 
 import camoweed.campatibility.api.impl.vintagequesting.BTFishingQuests;
+import camoweed.campatibility.api.impl.vintagequesting.DefaultQuest;
 import camoweed.campatibility.api.impl.vintagequesting.RoseToolsQuests;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -47,6 +48,7 @@ public class Campatibility implements ModInitializer {
 		if (quests) {LOGGER.info("☑ Vintage Questing is active!");
 			if (btfishing && BTFishingQuests) {LOGGER.info("☑ Better than Fishing is active!");new BTFishingQuests().reloadClient();}
 			if (roseTools && RoseToolQuests) {LOGGER.info("☑ Rose Tools is active!");new RoseToolsQuests().reloadClient();}
+			else {LOGGER.info("⚠ No modded quests active");new DefaultQuest().reloadClient();}
 		}
 	}
 }
