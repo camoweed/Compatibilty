@@ -36,6 +36,9 @@
 	},
 	"suggests": {
 		"modmenu": ">=${modmenu}",
-		"vintage-questing": "*"
+		"vintage-questing": "*",
+		"rosesword": "*",
+		"btf": "*",
+		"stardew": "*"
 	}
 }

@@ -2,6 +2,7 @@ package camoweed.campatibility.api.impl.vintagequesting.chapter;
 
 import camoweed.campatibility.api.impl.vintagequesting.BTFishingQuests;
 import camoweed.campatibility.api.impl.vintagequesting.StardewQuests;
+import luke.stardew.items.StardewItems;
 import net.minecraft.core.item.ItemStack;
 import net.minecraft.core.item.Items;
 import org.jetbrains.annotations.NotNull;
@@ -24,7 +25,7 @@ public class StardewQuestChapter extends ChapterData {
 
 	@Override
 	public @NotNull ItemStack getIcon() {
-		return Items.SEEDS_WHEAT.getDefaultStack();
+		return StardewItems.BLUEBERRY.getDefaultStack();
 	}
 
 	@Override

@@ -17,7 +17,7 @@ public class StardewQuestPage extends ChapterPage {
 
 	@Override
 	public @Nullable IconCoordinate getBackgroundTile(ScreenQuestbook screenQuestbook, int i, Random random, int i1, int i2) {
-		return TextureRegistry.getTexture("minecraft:block/farmland");
+		return TextureRegistry.getTexture("minecraft:block/mud");
 	}
 
 	@Override

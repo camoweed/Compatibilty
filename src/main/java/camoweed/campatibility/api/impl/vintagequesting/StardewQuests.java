@@ -5,6 +5,7 @@ import camoweed.campatibility.api.impl.vintagequesting.chapter.StardewQuestChapt
 import camoweed.campatibility.api.impl.vintagequesting.page.BTFishingQuestPage;
 import camoweed.campatibility.api.impl.vintagequesting.page.StardewQuestPage;
 import imbacrian.btf.items.ItemsList;
+import luke.stardew.items.StardewItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
@@ -61,9 +62,146 @@ public class StardewQuests implements VQPlugin {
 	}
 	public static List<QuestData> addStardewQuests() {
 		QuestData starter = new QuestData("stardew:starter", "quest.stardew.starter", Items.SEEDS_WHEAT, Logic.AND, Logic.AND)
+			.setY(1)
 			.setTasks(listOf(new ClickTaskData("stardew:starter/click")));
+//fish
+		QuestData fishing = new QuestData("stardew:fishing", "quest.stardew.fishing", StardewItems.TOOL_FISHINGROD_STONE, Logic.AND, Logic.AND)
+			.setX(-4)
+			.setY(2)
+			.setPreRequisites(listOf(starter))
+			.setTasks(listOf(new ClickTaskData("stardew:fishing/click")));
 
-		return List.of(starter);
+		QuestData rodUpgradeIron = holdQuestNoMetadata("rodUpgradeIron", StardewItems.TOOL_FISHINGROD_IRON,
+			zip(listOf("retrieval"),listOf(new ItemStack(StardewItems.TOOL_FISHINGROD_IRON, 1))),
+			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			listOf(fishing), fishing,0,-1);
+		QuestData rodUpgradeGold = holdQuestNoMetadata("rodUpgradeGold", StardewItems.TOOL_FISHINGROD_GOLD,
+			zip(listOf("retrieval"),listOf(new ItemStack(StardewItems.TOOL_FISHINGROD_GOLD, 1))),
+			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			listOf(fishing), rodUpgradeIron,0,-1);
+		QuestData rodUpgradeDiamond = holdQuestNoMetadata("rodUpgradeDiamond", StardewItems.TOOL_FISHINGROD_DIAMOND,
+			zip(listOf("retrieval"),listOf(new ItemStack(StardewItems.TOOL_FISHINGROD_DIAMOND, 1))),
+			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			listOf(fishing), rodUpgradeGold,0,-1);
+		QuestData rodUpgradeSteel = holdQuestNoMetadata("rodUpgradeSteel", StardewItems.TOOL_FISHINGROD_STEEL,
+			zip(listOf("retrieval"),listOf(new ItemStack(StardewItems.TOOL_FISHINGROD_STEEL, 1))),
+			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			listOf(fishing), rodUpgradeDiamond,0,-1);
+
+		QuestData salmon = holdQuestNoMetadata("salmon", StardewItems.FOOD_SALMON_RAW,
+			zip(listOf("retrieval"),listOf(new ItemStack(StardewItems.FOOD_SALMON_RAW, 8))),
+			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			listOf(fishing), fishing,2,-1);
+		QuestData bass = holdQuestNoMetadata("bass", StardewItems.FOOD_BASS_RAW,
+			zip(listOf("retrieval"),listOf(new ItemStack(StardewItems.FOOD_BASS_RAW, 8))),
+			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			listOf(fishing), fishing,2,-2);
+		QuestData snapper = holdQuestNoMetadata("snapper", StardewItems.FOOD_SNAPPER_RAW,
+			zip(listOf("retrieval"),listOf(new ItemStack(StardewItems.FOOD_SNAPPER_RAW, 8))),
+			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			listOf(fishing), fishing,2,-3);
+		QuestData fishingMaster = consumeQuest("fishingMaster", StardewItems.FISH_EEL_LAVA,
+			zip(listOf("retrieval","retrieval1","retrieval2","retrieval3","retrieval4"),listOf(new ItemStack(StardewItems.FISH_GHOST, 1), new ItemStack(StardewItems.FISH_EEL_LAVA, 1), new ItemStack(StardewItems.FISH_SWORD, 1),new ItemStack(StardewItems.FISH_STONE, 1),new ItemStack(StardewItems.FISH_PIG, 1))),
+			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			listOf(fishing), fishing,0,0)
+			.setX(-2)
+			.setY(2)
+			.setPreRequisites(listOf(salmon,bass,snapper,fishing));
+
+		QuestData farming = new QuestData("stardew:farming", "quest.stardew.farming", StardewItems.WATERING_CAN, Logic.AND, Logic.AND)
+			.setX(4)
+			.setY(2)
+			.setPreRequisites(listOf(starter))
+			.setTasks(listOf(new ClickTaskData("stardew:farming/click")));
+
+		QuestData wateringCanUpgrade = holdQuestNoMetadata("wateringCanUpgrade", StardewItems.WATERING_CAN_STEEL,
+			zip(listOf("retrieval"),listOf(new ItemStack(StardewItems.WATERING_CAN_STEEL, 1))),
+			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			listOf(farming), farming,0,-4);
+
+		QuestData carrot = holdQuestNoMetadata("carrot", StardewItems.CARROT,
+			zip(listOf("retrieval","retrieval1"),
+				listOf(
+					new ItemStack(StardewItems.CARROT, 8),
+					new ItemStack(StardewItems.SEEDS_CARROT, 16)
+				)),
+			zip(listOf("reward"),
+				listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			listOf(farming), farming,0,-1);
+		QuestData corn = holdQuestNoMetadata("corn", StardewItems.CORN,
+		zip(listOf("retrieval","retrieval1"),
+			listOf(
+				new ItemStack(StardewItems.CORN, 8),
+				new ItemStack(StardewItems.SEEDS_CORN, 16)
+			)),
+			zip(listOf("reward"),
+				listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			listOf(farming), farming,0,-2);
+		QuestData potato = holdQuestNoMetadata("potato", StardewItems.POTATO,
+		zip(listOf("retrieval","retrieval1"),
+			listOf(
+				new ItemStack(StardewItems.POTATO, 8),
+				new ItemStack(StardewItems.SEEDS_POTATO, 16)
+			)),
+			zip(listOf("reward"),
+				listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			listOf(farming), farming,0,-3);
+
+		QuestData berry = holdQuestNoMetadata("berry", StardewItems.BLUEBERRY,
+			zip(listOf("retrieval","retrieval1"),
+				listOf(
+					new ItemStack(StardewItems.BLUEBERRY, 8),
+					new ItemStack(StardewItems.SEEDS_BLUEBERRY, 16),
+					new ItemStack(StardewItems.CRANBERRIES, 8),
+					new ItemStack(StardewItems.SEEDS_CRANBERRIES, 16),
+					new ItemStack(StardewItems.GRAPES, 8),
+					new ItemStack(StardewItems.SEEDS_GRAPES, 16)
+				)),
+			zip(listOf("reward"),
+				listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			listOf(farming), farming,-2,-1);
+		QuestData tomato = holdQuestNoMetadata("tomato", StardewItems.TOMATO,
+			zip(listOf("retrieval","retrieval1"),
+				listOf(
+					new ItemStack(StardewItems.TOMATO, 8),
+					new ItemStack(StardewItems.SEEDS_TOMATO, 16)
+				)),
+			zip(listOf("reward"),
+				listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			listOf(farming), farming,-2,-2);
+		QuestData strawberry = holdQuestNoMetadata("strawberry", StardewItems.STRAWBERRY,
+			zip(listOf("retrieval","retrieval1"),
+				listOf(
+					new ItemStack(StardewItems.STRAWBERRY, 8),
+					new ItemStack(StardewItems.SEEDS_STRAWBERRY, 16)
+				)),
+			zip(listOf("reward"),
+				listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			listOf(farming), farming,-2,-3);
+
+		QuestData farmingMaster = consumeQuest("farmingMaster", StardewItems.BEANS_COFFEE,
+			zip(listOf("retrieval","retrieval1","retrieval2","retrieval3","retrieval4","retrieval5","retrieval6","retrieval7","retrieval8"),
+				listOf(
+					new ItemStack(StardewItems.BEANS_COFFEE, 16),
+					new ItemStack(StardewItems.CARROT, 8),
+					new ItemStack(StardewItems.CORN, 8),
+					new ItemStack(StardewItems.POTATO, 8),
+					new ItemStack(StardewItems.BLUEBERRY, 16),
+					new ItemStack(StardewItems.CRANBERRIES, 16),
+					new ItemStack(StardewItems.GRAPES, 16),
+					new ItemStack(StardewItems.STRAWBERRY, 8),
+					new ItemStack(StardewItems.PINEAPPLE, 8))),
+			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			listOf(fishing), fishing,0,0)
+			.setX(2)
+			.setY(2)
+			.setPreRequisites(listOf(carrot,potato,corn,berry,tomato,strawberry));
+
+		return List.of(starter, fishing, farming,
+			rodUpgradeIron, rodUpgradeGold, rodUpgradeDiamond, rodUpgradeSteel,
+			salmon, bass, snapper, fishingMaster,
+			wateringCanUpgrade,
+			carrot,potato,corn,berry,tomato,strawberry, farmingMaster);
 	}
 	public static QuestData simpleQuest(
 		String id,
