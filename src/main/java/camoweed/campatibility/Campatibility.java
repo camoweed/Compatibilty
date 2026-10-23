@@ -50,10 +50,9 @@ public class Campatibility implements ModInitializer {
 			boolean roseToolsActive = false;
 			if (btfishing && BTFishingQuests) {LOGGER.info("☑ Better than Fishing is active!");BTFishingLoaded.init(); btfActive = true;}
 			if (roseTools && RoseToolQuests) {LOGGER.info("☑ Rose Tools is active!");RoseToolsLoaded.init(); roseToolsActive = true;}
-			else if(!btfActive && !roseToolsActive) {LOGGER.info("⚠ No modded quests active");new DefaultQuest().reloadClient();}
+			if(!btfActive && !roseToolsActive) {LOGGER.info("⚠ No modded quests active");new DefaultQuest().reloadClient();}
 
 		}
-
 	}
 	private static class BTFishingLoaded {
 		static void init() {
