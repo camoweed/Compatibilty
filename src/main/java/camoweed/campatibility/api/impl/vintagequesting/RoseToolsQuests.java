@@ -48,7 +48,7 @@ public class RoseToolsQuests implements VQPlugin {
 	}
 
 	@Override
-	public boolean shouldLoad() {return FabricLoader.getInstance().isModLoaded("btf");}
+	public boolean shouldLoad() {return FabricLoader.getInstance().isModLoaded("rosesword");}
 
 	@Environment(EnvType.CLIENT)
 	public void reloadClient() {
