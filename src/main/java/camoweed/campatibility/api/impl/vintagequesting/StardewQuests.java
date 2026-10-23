@@ -100,8 +100,14 @@ public class StardewQuests implements VQPlugin {
 			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
 			listOf(fishing), fishing,2,-3);
 		QuestData fishingMaster = consumeQuest("fishingMaster", StardewItems.FISH_EEL_LAVA,
-			zip(listOf("retrieval","retrieval1","retrieval2","retrieval3","retrieval4"),listOf(new ItemStack(StardewItems.FISH_GHOST, 1), new ItemStack(StardewItems.FISH_EEL_LAVA, 1), new ItemStack(StardewItems.FISH_SWORD, 1),new ItemStack(StardewItems.FISH_STONE, 1),new ItemStack(StardewItems.FISH_PIG, 1))),
-			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			zip(listOf("retrieval","retrieval1","retrieval2","retrieval3"),
+				listOf(
+					new ItemStack(StardewItems.FISH_GHOST, 1),
+					new ItemStack(StardewItems.FISH_EEL_LAVA, 1),
+					new ItemStack(StardewItems.FISH_SWORD, 1),
+					new ItemStack(StardewItems.FISH_STONE, 1)
+				)),
+			zip(listOf("reward"), listOf(new ItemStack(StardewItems.ARMOR_CAN_OF_WORMS_GOLDEN, 1))),
 			listOf(fishing), fishing,0,0)
 			.setX(-2)
 			.setY(0)
@@ -196,7 +202,21 @@ public class StardewQuests implements VQPlugin {
 			.setY(0)
 			.setPreRequisites(listOf(carrot,potato,corn,berry,tomato,strawberry));
 		QuestData cookingMaster = consumeQuest("cookingMaster", StardewItems.FOOD_PIZZA,
-			zip(listOf("retrieval","retrieval1","retrieval2","retrieval3","retrieval4","retrieval5","retrieval6","retrieval7","retrieval8","retrieval9","retrieval10","retrieval11","retrieval12"),
+			zip(listOf("retrieval",
+					"retrieval1",
+					"retrieval2",
+					"retrieval3",
+					"retrieval4",
+					"retrieval5",
+					"retrieval6",
+					"retrieval7",
+					"retrieval8",
+					"retrieval9",
+					"retrieval10",
+					"retrieval11",
+					"retrieval12",
+					"retrieval13"
+					),
 				listOf(
 					new ItemStack(StardewItems.FOOD_PIZZA, 1),
 					new ItemStack(StardewItems.FOOD_APPLE_PIE, 1),
@@ -209,9 +229,9 @@ public class StardewQuests implements VQPlugin {
 					new ItemStack(StardewItems.CHEESE, 4),
 					new ItemStack(StardewItems.FOOD_STEW_FRUIT, 1),
 					new ItemStack(StardewItems.FOOD_STEW_CHEESE, 1),
-					new ItemStack(StardewItems.FOOD_STEW_FRUIT, 1),
-					new ItemStack(StardewItems.FOOD_STEW_TRUFFLE, 1)
-
+					new ItemStack(StardewItems.FOOD_BASS_COOKED, 1),
+					new ItemStack(StardewItems.FOOD_SALMON_COOKED, 1),
+					new ItemStack(StardewItems.FOOD_SNAPPER_COOKED, 1)
 				)),
 			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
 			listOf(farming), farming,0,0)
