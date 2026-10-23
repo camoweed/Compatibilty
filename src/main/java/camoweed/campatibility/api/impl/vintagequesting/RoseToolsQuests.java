@@ -1,5 +1,6 @@
 package camoweed.campatibility.api.impl.vintagequesting;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.item.IItemConvertible;
 import camoweed.campatibility.api.impl.vintagequesting.chapter.RoseToolsQuestChapter;
 import camoweed.campatibility.api.impl.vintagequesting.page.RoseToolsQuestPage;
@@ -38,6 +39,7 @@ public class RoseToolsQuests implements VQPlugin {
 
 	@Override
 	public void initializePlugin() {
+		if (!shouldLoad()) return;
 		List<QuestData> roseToolQuests = addRoseToolsQuests();
 		for (QuestData quest : roseToolQuests) {
 			ROSE_TOOLS_CHAPTER.addQuest(quest);
@@ -46,7 +48,7 @@ public class RoseToolsQuests implements VQPlugin {
 	}
 
 	@Override
-	public boolean shouldLoad() {return true;}
+	public boolean shouldLoad() {return FabricLoader.getInstance().isModLoaded("btf");}
 
 	@Environment(EnvType.CLIENT)
 	public void reloadClient() {

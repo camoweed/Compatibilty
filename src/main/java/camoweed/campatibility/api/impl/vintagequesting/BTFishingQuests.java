@@ -8,6 +8,7 @@ import imbacrian.btf.items.FishingRodItem;
 import imbacrian.btf.items.ItemsList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.block.Blocks;
 import net.minecraft.core.item.IItemConvertible;
 import net.minecraft.core.item.ItemStack;
@@ -42,6 +43,7 @@ public class BTFishingQuests implements VQPlugin {
 
 	@Override
 	public void initializePlugin() {
+		if (!shouldLoad()) return;
 		List<QuestData> btfquests = addBTFQuests();
 		for (QuestData quest : btfquests) {
 			BETTER_THAN_FISHING_CHAPTER.addQuest(quest);
@@ -51,7 +53,7 @@ public class BTFishingQuests implements VQPlugin {
 
 	@Override
 	public boolean shouldLoad() {
-		return true;
+		return FabricLoader.getInstance().isModLoaded("btf");
 	}
 
 	@Environment(EnvType.CLIENT)
