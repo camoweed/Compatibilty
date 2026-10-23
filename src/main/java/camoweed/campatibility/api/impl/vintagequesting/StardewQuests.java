@@ -62,11 +62,10 @@ public class StardewQuests implements VQPlugin {
 	}
 	public static List<QuestData> addStardewQuests() {
 		QuestData starter = new QuestData("stardew:starter", "quest.stardew.starter", Items.SEEDS_WHEAT, Logic.AND, Logic.AND)
-			.setY(1)
 			.setTasks(listOf(new ClickTaskData("stardew:starter/click")));
 //fish
 		QuestData fishing = new QuestData("stardew:fishing", "quest.stardew.fishing", StardewItems.TOOL_FISHINGROD_STONE, Logic.AND, Logic.AND)
-			.setX(-4)
+			.setX(-6)
 			.setY(2)
 			.setPreRequisites(listOf(starter))
 			.setTasks(listOf(new ClickTaskData("stardew:fishing/click")));
@@ -105,11 +104,11 @@ public class StardewQuests implements VQPlugin {
 			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
 			listOf(fishing), fishing,0,0)
 			.setX(-2)
-			.setY(2)
+			.setY(0)
 			.setPreRequisites(listOf(salmon,bass,snapper,fishing));
 
 		QuestData farming = new QuestData("stardew:farming", "quest.stardew.farming", StardewItems.WATERING_CAN, Logic.AND, Logic.AND)
-			.setX(4)
+			.setX(6)
 			.setY(2)
 			.setPreRequisites(listOf(starter))
 			.setTasks(listOf(new ClickTaskData("stardew:farming/click")));
@@ -192,16 +191,40 @@ public class StardewQuests implements VQPlugin {
 					new ItemStack(StardewItems.STRAWBERRY, 8),
 					new ItemStack(StardewItems.PINEAPPLE, 8))),
 			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
-			listOf(fishing), fishing,0,0)
+			listOf(farming), farming,0,0)
 			.setX(2)
-			.setY(2)
+			.setY(0)
 			.setPreRequisites(listOf(carrot,potato,corn,berry,tomato,strawberry));
+		QuestData cookingMaster = consumeQuest("cookingMaster", StardewItems.FOOD_PIZZA,
+			zip(listOf("retrieval","retrieval1","retrieval2","retrieval3","retrieval4","retrieval5","retrieval6","retrieval7","retrieval8","retrieval9","retrieval10","retrieval11","retrieval12"),
+				listOf(
+					new ItemStack(StardewItems.FOOD_PIZZA, 1),
+					new ItemStack(StardewItems.FOOD_APPLE_PIE, 1),
+					new ItemStack(StardewItems.FOOD_CAKE_CHOCOLATE, 1),
+					new ItemStack(StardewItems.JAR_JAM, 1),
+					new ItemStack(StardewItems.EGG_COOKED, 16),
+					new ItemStack(StardewItems.HONEY, 16),
+					new ItemStack(StardewItems.FOOD_COFFEE, 1),
+					new ItemStack(StardewItems.FOOD_COFFEE_LARGE, 1),
+					new ItemStack(StardewItems.CHEESE, 4),
+					new ItemStack(StardewItems.FOOD_STEW_FRUIT, 1),
+					new ItemStack(StardewItems.FOOD_STEW_CHEESE, 1),
+					new ItemStack(StardewItems.FOOD_STEW_FRUIT, 1),
+					new ItemStack(StardewItems.FOOD_STEW_TRUFFLE, 1)
+
+				)),
+			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			listOf(farming), farming,0,0)
+			.setX(0)
+			.setY(2)
+			.setPreRequisites(listOf(fishing, farming, starter));
 
 		return List.of(starter, fishing, farming,
 			rodUpgradeIron, rodUpgradeGold, rodUpgradeDiamond, rodUpgradeSteel,
 			salmon, bass, snapper, fishingMaster,
 			wateringCanUpgrade,
-			carrot,potato,corn,berry,tomato,strawberry, farmingMaster);
+			carrot,potato,corn,berry,tomato,strawberry, farmingMaster,
+			cookingMaster);
 	}
 	public static QuestData simpleQuest(
 		String id,
