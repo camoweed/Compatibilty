@@ -11,4 +11,4 @@ depending on your modlist you can see different benefits
 ### [Better than Fishing](https://modrinth.com/mod/betterthanfishing)
 🎣 full progression challenge walkthrough with vintage questing
 ### [Stardew Farming](https://github.com/Redart15/stardew-farming-bta)
-⚠ wip progression walkthrough with vintage questing
+⭐ full progression challenge walkthrough with vintage questing
