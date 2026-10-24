@@ -18,6 +18,9 @@
 		"main": [
           "camoweed.campatibility.Campatibility"
 		],
+		"client": [
+			"camoweed.campatibility.item.PaxelRoseToolsModels"
+		],
 		"vintagequesting": [
 			"camoweed.campatibility.api.impl.vintagequesting.DefaultQuest",
 			"camoweed.campatibility.api.impl.vintagequesting.RoseToolsQuests",
@@ -39,6 +42,7 @@
 		"vintage-questing": "*",
 		"rosesword": "*",
 		"btf": "*",
-		"stardew": "*"
+		"stardew": "*",
+		"paxels": "*"
 	}
 }

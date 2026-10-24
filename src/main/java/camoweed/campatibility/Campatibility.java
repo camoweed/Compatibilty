@@ -4,11 +4,15 @@ import camoweed.campatibility.api.impl.vintagequesting.BTFishingQuests;
 import camoweed.campatibility.api.impl.vintagequesting.DefaultQuest;
 import camoweed.campatibility.api.impl.vintagequesting.RoseToolsQuests;
 import camoweed.campatibility.api.impl.vintagequesting.StardewQuests;
+import camoweed.campatibility.item.PaxelRoseToolsItems;
+import camoweed.campatibility.item.PaxelRoseToolsModels;
+import luke.paxels.PaxelItems;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.HalpLibe;
+import turniplabs.halplibe.event.defs.ClientEvents;
 import turniplabs.halplibe.event.defs.CommonEvents;
 import turniplabs.halplibe.util.TomlConfigHandler;
 import turniplabs.halplibe.util.dependency.Key;
@@ -23,11 +27,14 @@ public class Campatibility implements ModInitializer {
 	boolean roseTools = FabricLoader.getInstance().isModLoaded("rosesword");
 	boolean btfishing = FabricLoader.getInstance().isModLoaded("btf");
 	boolean stardew = FabricLoader.getInstance().isModLoaded("stardew");
+	boolean paxels = FabricLoader.getInstance().isModLoaded("paxels");
 
 	Key KEY = Key.of(MOD_ID);
 	public static final boolean RoseToolQuests;
 	public static final boolean BTFishingQuests;
 	public static final boolean StarwdewFarmingQuests;
+
+	public static final boolean PaxelandRoseTools;
 
 	public static final TomlConfigHandler CFG;
 	static {
@@ -37,17 +44,24 @@ public class Campatibility implements ModInitializer {
 		cfg.addEntry("Quests.BTFishing", "Quests for Better than Fishing", true);
 		cfg.addEntry("Quests.StardewFarming", "Quests for Stardew Farming", true);
 
+		cfg.addCategory("Items");
+		cfg.addEntry("Items.PaxelxRoseTools", "Rose Paxel", true);
+
 		CFG = new TomlConfigHandler(MOD_ID, cfg);
 
 		RoseToolQuests = CFG.getBoolean("Quests.RoseTools");
 		BTFishingQuests = CFG.getBoolean("Quests.BTFishing");
 		StarwdewFarmingQuests = CFG.getBoolean("Quests.StardewFarming");
+
+		PaxelandRoseTools = CFG.getBoolean("Items.PaxelxRoseTools");
 	}
 
 	@Override
 	public void onInitialize() {
 		CommonEvents.BEFORE_GAME_START.listen(KEY, this::beforeGameStart);
 		CommonEvents.AFTER_GAME_START.listen(KEY, this::afterGameStart);
+		if (roseTools && paxels && PaxelandRoseTools) {LOGGER.info("☑ Paxels + Rose Tools is active!");PaxelandRoseToolsLoaded.init();
+		}
 	}
 	public void beforeGameStart() {}
 	public void afterGameStart() {
@@ -75,6 +89,11 @@ public class Campatibility implements ModInitializer {
 	private static class StardewLoaded {
 		static void init() {
 			new StardewQuests().reloadClient();
+		}
+	}
+	private static class PaxelandRoseToolsLoaded {
+		static void init() {
+			CommonEvents.AFTER_ITEM_INIT.listen(Key.of(MOD_ID), PaxelRoseToolsItems::init);
 		}
 	}
 }
