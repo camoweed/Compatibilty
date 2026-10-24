@@ -6,7 +6,6 @@ import camoweed.campatibility.api.impl.vintagequesting.RoseToolsQuests;
 import camoweed.campatibility.api.impl.vintagequesting.StardewQuests;
 import camoweed.campatibility.item.PaxelRoseToolsItems;
 import camoweed.campatibility.item.PaxelRoseToolsModels;
-import luke.paxels.PaxelItems;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
@@ -60,8 +59,7 @@ public class Campatibility implements ModInitializer {
 	public void onInitialize() {
 		CommonEvents.BEFORE_GAME_START.listen(KEY, this::beforeGameStart);
 		CommonEvents.AFTER_GAME_START.listen(KEY, this::afterGameStart);
-		if (roseTools && paxels && PaxelandRoseTools) {LOGGER.info("☑ Paxels + Rose Tools is active!");PaxelandRoseToolsLoaded.init();
-		}
+		if (roseTools && paxels && PaxelandRoseTools) {LOGGER.info("☑ Paxels + Rose Tools is active!");PaxelandRoseToolsLoaded.init();}
 	}
 	public void beforeGameStart() {}
 	public void afterGameStart() {
@@ -94,6 +92,8 @@ public class Campatibility implements ModInitializer {
 	private static class PaxelandRoseToolsLoaded {
 		static void init() {
 			CommonEvents.AFTER_ITEM_INIT.listen(Key.of(MOD_ID), PaxelRoseToolsItems::init);
+			ClientEvents.BEFORE_CLIENT_START.listen(Key.of(MOD_ID), PaxelRoseToolsModels::beforeClientStart);
+			ClientEvents.ITEM_MODEL_RELOAD.listen(Key.of(MOD_ID), PaxelRoseToolsModels::initItemModels);
 		}
 	}
 }

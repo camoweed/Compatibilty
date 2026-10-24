@@ -12,12 +12,7 @@ import turniplabs.halplibe.util.dependency.Key;
 import static camoweed.campatibility.Campatibility.MOD_ID;
 import static net.minecraft.client.render.item.model.ItemModelDispatcher.*;
 
-public class PaxelRoseToolsModels implements ClientModInitializer {
-	@Override
-	public void onInitializeClient() {
-		ClientEvents.BEFORE_CLIENT_START.listen(Key.of(MOD_ID), PaxelRoseToolsModels::beforeClientStart);
-		ClientEvents.ITEM_MODEL_RELOAD.listen(Key.of(MOD_ID), PaxelRoseToolsModels::initItemModels);
-	}
+public class PaxelRoseToolsModels {
 	public static void beforeClientStart() {
 		PaxelRoseToolsModels.registerTextures();
 	}
