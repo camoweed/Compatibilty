@@ -4,10 +4,7 @@ import camoweed.campatibility.api.impl.vintagequesting.BTFishingQuests;
 import camoweed.campatibility.api.impl.vintagequesting.DefaultQuest;
 import camoweed.campatibility.api.impl.vintagequesting.RoseToolsQuests;
 import camoweed.campatibility.api.impl.vintagequesting.StardewQuests;
-import camoweed.campatibility.item.PaxelBTFItems;
-import camoweed.campatibility.item.PaxelBTFModels;
-import camoweed.campatibility.item.PaxelRoseToolsItems;
-import camoweed.campatibility.item.PaxelRoseToolsModels;
+import camoweed.campatibility.item.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import org.slf4j.Logger;
@@ -29,14 +26,16 @@ public class Campatibility implements ModInitializer {
 	boolean btfishing = FabricLoader.getInstance().isModLoaded("btf");
 	boolean stardew = FabricLoader.getInstance().isModLoaded("stardew");
 	boolean paxels = FabricLoader.getInstance().isModLoaded("paxels");
+	boolean heatedSteel = FabricLoader.getInstance().isModLoaded("superheatedsteel");
 
 	Key KEY = Key.of(MOD_ID);
 	public static final boolean RoseToolQuests;
 	public static final boolean BTFishingQuests;
 	public static final boolean StarwdewFarmingQuests;
 
-	public static final boolean PaxelandRoseTools;
-	public static final boolean PaxelandBTF;
+	public static final boolean PaxelsandRoseTools;
+	public static final boolean PaxelsandBTF;
+	public static final boolean PaxelsandSuperheatedSteel;
 
 	public static final TomlConfigHandler CFG;
 	static {
@@ -47,8 +46,9 @@ public class Campatibility implements ModInitializer {
 		cfg.addEntry("Quests.StardewFarming", "Quests for Stardew Farming", true);
 
 		cfg.addCategory("Items");
-		cfg.addEntry("Items.PaxelxRoseTools", "Rose Paxel", true);
-		cfg.addEntry("Items.PaxelxBetterThanFishing", "Iridescite Paxel", true);
+		cfg.addEntry("Items.PaxelsxRoseTools", "Rose Paxel", true);
+		cfg.addEntry("Items.PaxelsxBetterThanFishing", "Iridescite Paxel", true);
+		cfg.addEntry("Items.PaxelsxSuperheatedSteel", "Superheated Steel Paxel", true);
 
 		CFG = new TomlConfigHandler(MOD_ID, cfg);
 
@@ -56,16 +56,18 @@ public class Campatibility implements ModInitializer {
 		BTFishingQuests = CFG.getBoolean("Quests.BTFishing");
 		StarwdewFarmingQuests = CFG.getBoolean("Quests.StardewFarming");
 
-		PaxelandRoseTools = CFG.getBoolean("Items.PaxelxRoseTools");
-		PaxelandBTF = CFG.getBoolean("Items.PaxelxBetterThanFishing");
+		PaxelsandRoseTools = CFG.getBoolean("Items.PaxelsxRoseTools");
+		PaxelsandBTF = CFG.getBoolean("Items.PaxelsxBetterThanFishing");
+		PaxelsandSuperheatedSteel = CFG.getBoolean("Items.PaxelsxSuperheatedSteel");
 	}
 
 	@Override
 	public void onInitialize() {
 		CommonEvents.BEFORE_GAME_START.listen(KEY, this::beforeGameStart);
 		CommonEvents.AFTER_GAME_START.listen(KEY, this::afterGameStart);
-		if (roseTools && paxels && PaxelandRoseTools) {LOGGER.info("☑ Paxels + Rose Tools is active!");PaxelandRoseToolsLoaded.init();}
-		if (btfishing && paxels && PaxelandBTF) {LOGGER.info("☑ Paxels + Rose Tools is active!");PaxelandBTFLoaded.init();}
+		if (roseTools && paxels && PaxelsandRoseTools) {LOGGER.info("☑ Paxels + Rose Tools is active!");PaxelandRoseToolsLoaded.init();}
+		if (btfishing && paxels && PaxelsandBTF) {LOGGER.info("☑ Paxels + Better than Fishing is active!");PaxelandBTFLoaded.init();}
+		if (heatedSteel && paxels && PaxelsandSuperheatedSteel) {LOGGER.info("☑ Paxels + Superheated Steel is active!");PaxelandSuperheatedSteelLoaded.init();}
 	}
 	public void beforeGameStart() {}
 	public void afterGameStart() {
@@ -107,6 +109,13 @@ public class Campatibility implements ModInitializer {
 			CommonEvents.AFTER_ITEM_INIT.listen(Key.of(MOD_ID), PaxelBTFItems::initializeItems);
 			ClientEvents.BEFORE_CLIENT_START.listen(Key.of(MOD_ID), PaxelBTFModels::beforeClientStart);
 			ClientEvents.ITEM_MODEL_RELOAD.listen(Key.of(MOD_ID), PaxelBTFModels::initItemModels);
+		}
+	}
+	private static class PaxelandSuperheatedSteelLoaded {
+		static void init() {
+			CommonEvents.AFTER_ITEM_INIT.listen(Key.of(MOD_ID), PaxelSuperheatedSteelItems::initializeItems);
+			ClientEvents.BEFORE_CLIENT_START.listen(Key.of(MOD_ID), PaxelSuperheatedSteelModels::beforeClientStart);
+			ClientEvents.ITEM_MODEL_RELOAD.listen(Key.of(MOD_ID), PaxelSuperheatedSteelModels::initItemModels);
 		}
 	}
 }

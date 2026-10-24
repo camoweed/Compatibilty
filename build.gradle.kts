@@ -64,6 +64,7 @@ dependencies {
 	compileOnly (files("libs/btf-1.0.4+8.0.1.jar"))
 	compileOnly (files("libs/stardew-3.5.8+8.0.1.jar"))
 	compileOnly (files("libs/paxels-1.5.0+8.0.1.jar"))
+	compileOnly (files("libs/superheatedsteel-1.0.0+8.0.1.jar"))
 }
 java {
 	toolchain {
