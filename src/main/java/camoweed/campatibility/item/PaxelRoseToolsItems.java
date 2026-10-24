@@ -11,17 +11,10 @@ import turniplabs.halplibe.helper.creativeInventory.CreativeInventoryPlacement;
 public class PaxelRoseToolsItems {
 	public static Item TOOL_PAXEL_ROSE;
 
-	private static boolean hasInit = false;
-
-	public static void init() {
-		if (!hasInit) {
-			hasInit = true;
-			initializeItems();
-		}
-	}
 	public static String itemKey(String string) {
 		return "campatibility" + ":item/" + string;
 	}
+
 	public static void initializeItems() {
 		TOOL_PAXEL_ROSE = new ItemBuilder("campatibility")
 			.setCreativeInventoryPlacement(new CreativeInventoryPlacement.After(() -> Items.TOOL_SWORD_STEEL))

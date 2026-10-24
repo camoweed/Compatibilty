@@ -23,7 +23,8 @@ public class PaxelRoseToolsModels {
 		}
 	}
 	public static void initItemModels(ItemModelDispatcher dispatcher) {
-		dispatcher.addDispatch(new ItemModelStandard(PaxelRoseToolsItems.TOOL_PAXEL_ROSE).setIcon("campatibilty:item/tool_paxel_rose")
+		dispatcher.addDispatch(new ItemModelStandard(PaxelRoseToolsItems.TOOL_PAXEL_ROSE)
+			.setIcon("campatibility:item/tool_paxel_rose")
 			.setDisplayPos("firstperson_righthand", HANDHELD_FIRST_PERSON_RIGHT_HAND)
 			.setDisplayPos("firstperson_lefthand", HANDHELD_FIRST_PERSON_LEFT_HAND)
 			.setDisplayPos("thirdperson_righthand", HANDHELD_THIRD_PERSON_RIGHT_HAND)
