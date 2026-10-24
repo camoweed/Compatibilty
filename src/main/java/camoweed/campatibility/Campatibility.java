@@ -4,6 +4,8 @@ import camoweed.campatibility.api.impl.vintagequesting.BTFishingQuests;
 import camoweed.campatibility.api.impl.vintagequesting.DefaultQuest;
 import camoweed.campatibility.api.impl.vintagequesting.RoseToolsQuests;
 import camoweed.campatibility.api.impl.vintagequesting.StardewQuests;
+import camoweed.campatibility.item.PaxelBTFItems;
+import camoweed.campatibility.item.PaxelBTFModels;
 import camoweed.campatibility.item.PaxelRoseToolsItems;
 import camoweed.campatibility.item.PaxelRoseToolsModels;
 import net.fabricmc.api.ModInitializer;
@@ -34,6 +36,7 @@ public class Campatibility implements ModInitializer {
 	public static final boolean StarwdewFarmingQuests;
 
 	public static final boolean PaxelandRoseTools;
+	public static final boolean PaxelandBTF;
 
 	public static final TomlConfigHandler CFG;
 	static {
@@ -45,6 +48,7 @@ public class Campatibility implements ModInitializer {
 
 		cfg.addCategory("Items");
 		cfg.addEntry("Items.PaxelxRoseTools", "Rose Paxel", true);
+		cfg.addEntry("Items.PaxelxBetterThanFishing", "Iridescite Paxel", true);
 
 		CFG = new TomlConfigHandler(MOD_ID, cfg);
 
@@ -53,6 +57,7 @@ public class Campatibility implements ModInitializer {
 		StarwdewFarmingQuests = CFG.getBoolean("Quests.StardewFarming");
 
 		PaxelandRoseTools = CFG.getBoolean("Items.PaxelxRoseTools");
+		PaxelandBTF = CFG.getBoolean("Items.PaxelxBetterThanFishing");
 	}
 
 	@Override
@@ -60,6 +65,7 @@ public class Campatibility implements ModInitializer {
 		CommonEvents.BEFORE_GAME_START.listen(KEY, this::beforeGameStart);
 		CommonEvents.AFTER_GAME_START.listen(KEY, this::afterGameStart);
 		if (roseTools && paxels && PaxelandRoseTools) {LOGGER.info("☑ Paxels + Rose Tools is active!");PaxelandRoseToolsLoaded.init();}
+		if (btfishing && paxels && PaxelandBTF) {LOGGER.info("☑ Paxels + Rose Tools is active!");PaxelandBTFLoaded.init();}
 	}
 	public void beforeGameStart() {}
 	public void afterGameStart() {
@@ -94,6 +100,13 @@ public class Campatibility implements ModInitializer {
 			CommonEvents.AFTER_ITEM_INIT.listen(Key.of(MOD_ID), PaxelRoseToolsItems::initializeItems);
 			ClientEvents.BEFORE_CLIENT_START.listen(Key.of(MOD_ID), PaxelRoseToolsModels::beforeClientStart);
 			ClientEvents.ITEM_MODEL_RELOAD.listen(Key.of(MOD_ID), PaxelRoseToolsModels::initItemModels);
+		}
+	}
+	private static class PaxelandBTFLoaded {
+		static void init() {
+			CommonEvents.AFTER_ITEM_INIT.listen(Key.of(MOD_ID), PaxelBTFItems::initializeItems);
+			ClientEvents.BEFORE_CLIENT_START.listen(Key.of(MOD_ID), PaxelBTFModels::beforeClientStart);
+			ClientEvents.ITEM_MODEL_RELOAD.listen(Key.of(MOD_ID), PaxelBTFModels::initItemModels);
 		}
 	}
 }
