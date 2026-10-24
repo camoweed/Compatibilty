@@ -12,7 +12,7 @@ depending on your modlist you can see different benefits
 🎣 full progression challenge walkthrough with vintage questing
 ### [Stardew Farming](https://github.com/Redart15/stardew-farming-bta)
 ⭐ full progression challenge walkthrough with vintage questing
-### [Paxels]()
+### [Paxels](https://github.com/LukeisStuff/paxels)
 ⛏ crossover items
 
 Rose Paxel (Rose Tools), Iridescite Paxel (Better than Fishing)
