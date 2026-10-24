@@ -5,6 +5,7 @@ import camoweed.campatibility.api.impl.vintagequesting.chapter.StardewQuestChapt
 import camoweed.campatibility.api.impl.vintagequesting.page.BTFishingQuestPage;
 import camoweed.campatibility.api.impl.vintagequesting.page.StardewQuestPage;
 import imbacrian.btf.items.ItemsList;
+import luke.stardew.blocks.StardewBlocks;
 import luke.stardew.items.StardewItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -64,40 +65,45 @@ public class StardewQuests implements VQPlugin {
 		QuestData starter = new QuestData("stardew:starter", "quest.stardew.starter", Items.SEEDS_WHEAT, Logic.AND, Logic.AND)
 			.setTasks(listOf(new ClickTaskData("stardew:starter/click")));
 //fish
-		QuestData fishing = new QuestData("stardew:fishing", "quest.stardew.fishing", StardewItems.TOOL_FISHINGROD_STONE, Logic.AND, Logic.AND)
+
+		QuestData fishing = simpleClickQuest("fishing", StardewItems.TOOL_FISHINGROD_STONE,
+			zip(listOf("reward"),
+				listOf(
+					new ItemStack(StardewItems.TOOL_FISHINGROD_STONE, 1, 64),
+					new ItemStack(StardewItems.WORM, 1)
+					)),
+			listOf(starter), starter, 0, 0)
 			.setX(-6)
-			.setY(2)
-			.setPreRequisites(listOf(starter))
-			.setTasks(listOf(new ClickTaskData("stardew:fishing/click")));
+			.setY(2);
 
 		QuestData rodUpgradeIron = holdQuestNoMetadata("rodUpgradeIron", StardewItems.TOOL_FISHINGROD_IRON,
 			zip(listOf("retrieval"),listOf(new ItemStack(StardewItems.TOOL_FISHINGROD_IRON, 1))),
-			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			zip(listOf("reward"), listOf(new ItemStack(StardewItems.WORM, 2))),
 			listOf(fishing), fishing,0,-1);
 		QuestData rodUpgradeGold = holdQuestNoMetadata("rodUpgradeGold", StardewItems.TOOL_FISHINGROD_GOLD,
 			zip(listOf("retrieval"),listOf(new ItemStack(StardewItems.TOOL_FISHINGROD_GOLD, 1))),
-			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			zip(listOf("reward"), listOf(new ItemStack(StardewItems.WORM, 4))),
 			listOf(fishing), rodUpgradeIron,0,-1);
 		QuestData rodUpgradeDiamond = holdQuestNoMetadata("rodUpgradeDiamond", StardewItems.TOOL_FISHINGROD_DIAMOND,
 			zip(listOf("retrieval"),listOf(new ItemStack(StardewItems.TOOL_FISHINGROD_DIAMOND, 1))),
-			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			zip(listOf("reward"), listOf(new ItemStack(StardewItems.WORM, 8))),
 			listOf(fishing), rodUpgradeGold,0,-1);
 		QuestData rodUpgradeSteel = holdQuestNoMetadata("rodUpgradeSteel", StardewItems.TOOL_FISHINGROD_STEEL,
 			zip(listOf("retrieval"),listOf(new ItemStack(StardewItems.TOOL_FISHINGROD_STEEL, 1))),
-			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			zip(listOf("reward"), listOf(new ItemStack(StardewItems.WORM, 16))),
 			listOf(fishing), rodUpgradeDiamond,0,-1);
 
 		QuestData salmon = holdQuestNoMetadata("salmon", StardewItems.FOOD_SALMON_RAW,
 			zip(listOf("retrieval"),listOf(new ItemStack(StardewItems.FOOD_SALMON_RAW, 8))),
-			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			zip(listOf("reward"), listOf()),
 			listOf(fishing), fishing,2,-1);
 		QuestData bass = holdQuestNoMetadata("bass", StardewItems.FOOD_BASS_RAW,
 			zip(listOf("retrieval"),listOf(new ItemStack(StardewItems.FOOD_BASS_RAW, 8))),
-			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			zip(listOf("reward"), listOf()),
 			listOf(fishing), fishing,2,-2);
 		QuestData snapper = holdQuestNoMetadata("snapper", StardewItems.FOOD_SNAPPER_RAW,
 			zip(listOf("retrieval"),listOf(new ItemStack(StardewItems.FOOD_SNAPPER_RAW, 8))),
-			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			zip(listOf("reward"), listOf()),
 			listOf(fishing), fishing,2,-3);
 		QuestData fishingMaster = consumeQuest("fishingMaster", StardewItems.FISH_EEL_LAVA,
 			zip(listOf("retrieval","retrieval1","retrieval2","retrieval3"),
@@ -112,16 +118,18 @@ public class StardewQuests implements VQPlugin {
 			.setX(-2)
 			.setY(0)
 			.setPreRequisites(listOf(salmon,bass,snapper,fishing));
-
-		QuestData farming = new QuestData("stardew:farming", "quest.stardew.farming", StardewItems.WATERING_CAN, Logic.AND, Logic.AND)
+		QuestData farming = simpleClickQuest("farming", StardewItems.WATERING_CAN,
+			zip(listOf("reward"),
+				listOf(
+					new ItemStack(StardewItems.WATERING_CAN, 1)
+				)),
+			listOf(starter), starter, 0, 0)
 			.setX(6)
-			.setY(2)
-			.setPreRequisites(listOf(starter))
-			.setTasks(listOf(new ClickTaskData("stardew:farming/click")));
+			.setY(2);
 
 		QuestData wateringCanUpgrade = holdQuestNoMetadata("wateringCanUpgrade", StardewItems.WATERING_CAN_STEEL,
 			zip(listOf("retrieval"),listOf(new ItemStack(StardewItems.WATERING_CAN_STEEL, 1))),
-			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			zip(listOf("reward"), listOf(new ItemStack(StardewItems.BEANS_COFFEE, 2))),
 			listOf(farming), farming,0,-4);
 
 		QuestData carrot = holdQuestNoMetadata("carrot", StardewItems.CARROT,
@@ -131,7 +139,7 @@ public class StardewQuests implements VQPlugin {
 					new ItemStack(StardewItems.SEEDS_CARROT, 16)
 				)),
 			zip(listOf("reward"),
-				listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+				listOf()),
 			listOf(farming), farming,0,-1);
 		QuestData corn = holdQuestNoMetadata("corn", StardewItems.CORN,
 		zip(listOf("retrieval","retrieval1"),
@@ -140,7 +148,7 @@ public class StardewQuests implements VQPlugin {
 				new ItemStack(StardewItems.SEEDS_CORN, 16)
 			)),
 			zip(listOf("reward"),
-				listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+				listOf()),
 			listOf(farming), farming,0,-2);
 		QuestData potato = holdQuestNoMetadata("potato", StardewItems.POTATO,
 		zip(listOf("retrieval","retrieval1"),
@@ -149,11 +157,11 @@ public class StardewQuests implements VQPlugin {
 				new ItemStack(StardewItems.SEEDS_POTATO, 16)
 			)),
 			zip(listOf("reward"),
-				listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+				listOf()),
 			listOf(farming), farming,0,-3);
 
 		QuestData berry = holdQuestNoMetadata("berry", StardewItems.BLUEBERRY,
-			zip(listOf("retrieval","retrieval1"),
+			zip(listOf("retrieval","retrieval1","retrieval2","retrieval3","retrieval4","retrieval5"),
 				listOf(
 					new ItemStack(StardewItems.BLUEBERRY, 8),
 					new ItemStack(StardewItems.SEEDS_BLUEBERRY, 16),
@@ -163,7 +171,7 @@ public class StardewQuests implements VQPlugin {
 					new ItemStack(StardewItems.SEEDS_GRAPES, 16)
 				)),
 			zip(listOf("reward"),
-				listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+				listOf()),
 			listOf(farming), farming,-2,-1);
 		QuestData tomato = holdQuestNoMetadata("tomato", StardewItems.TOMATO,
 			zip(listOf("retrieval","retrieval1"),
@@ -172,7 +180,7 @@ public class StardewQuests implements VQPlugin {
 					new ItemStack(StardewItems.SEEDS_TOMATO, 16)
 				)),
 			zip(listOf("reward"),
-				listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+				listOf()),
 			listOf(farming), farming,-2,-2);
 		QuestData strawberry = holdQuestNoMetadata("strawberry", StardewItems.STRAWBERRY,
 			zip(listOf("retrieval","retrieval1"),
@@ -181,7 +189,7 @@ public class StardewQuests implements VQPlugin {
 					new ItemStack(StardewItems.SEEDS_STRAWBERRY, 16)
 				)),
 			zip(listOf("reward"),
-				listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+				listOf()),
 			listOf(farming), farming,-2,-3);
 
 		QuestData farmingMaster = consumeQuest("farmingMaster", StardewItems.BEANS_COFFEE,
@@ -195,8 +203,9 @@ public class StardewQuests implements VQPlugin {
 					new ItemStack(StardewItems.CRANBERRIES, 16),
 					new ItemStack(StardewItems.GRAPES, 16),
 					new ItemStack(StardewItems.STRAWBERRY, 8),
-					new ItemStack(StardewItems.PINEAPPLE, 8))),
-			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+					new ItemStack(StardewItems.PINEAPPLE, 4))),
+			zip(listOf("reward"),
+				listOf(new ItemStack(StardewBlocks.SAPLING_APPLE))),
 			listOf(farming), farming,0,0)
 			.setX(2)
 			.setY(0)
@@ -233,18 +242,26 @@ public class StardewQuests implements VQPlugin {
 					new ItemStack(StardewItems.FOOD_SALMON_COOKED, 1),
 					new ItemStack(StardewItems.FOOD_SNAPPER_COOKED, 1)
 				)),
-			zip(listOf("reward"), listOf(new ItemStack(ItemsList.IRIDESCENT_CLUMP, 1))),
+			zip(listOf("reward"), listOf(new ItemStack(StardewBlocks.SAPLING_APPLE_GOLDEN, 1))),
 			listOf(farming), farming,0,0)
 			.setX(0)
 			.setY(2)
 			.setPreRequisites(listOf(fishing, farming, starter));
 
+		QuestData totalMaster = simpleClickQuest("totalMaster", StardewBlocks.SAPLING_APPLE_GOLDEN,
+			zip(listOf("reward"),
+				listOf()),
+			listOf(starter), starter, 0, 0)
+			.setX(0)
+			.setY(-2)
+			.setPreRequisites(listOf(fishingMaster,farmingMaster,cookingMaster));
+
 		return List.of(starter, fishing, farming,
 			rodUpgradeIron, rodUpgradeGold, rodUpgradeDiamond, rodUpgradeSteel,
-			salmon, bass, snapper, fishingMaster,
+			salmon, bass, snapper,
 			wateringCanUpgrade,
-			carrot,potato,corn,berry,tomato,strawberry, farmingMaster,
-			cookingMaster);
+			carrot,potato,corn,berry,tomato,strawberry,
+			fishingMaster, farmingMaster, cookingMaster, totalMaster);
 	}
 	public static QuestData simpleQuest(
 		String id,
@@ -306,13 +323,24 @@ public class StardewQuests implements VQPlugin {
 	public static QuestData simpleClickQuest(
 		String id,
 		IItemConvertible icon,
+		//List<Pair<String, ItemStack>> tasks,
+		List<Pair<String, ItemStack>> rewards,
 		List<QuestData> preRequisites,
 		QuestData offsetQuest,
 		int xOffset,
 		int yOffset
 	) {
+//		List<TaskData> retrievalTasks = new ArrayList<>();
+//		for (Pair<String, ItemStack> task : tasks) {
+//			retrievalTasks.add(new RetrievalTaskData("stardew:" + id + "/" + task.getLeft(), task.getRight()));
+//		}
+		List<RewardData> itemRewards = new ArrayList<>();
+		for (Pair<String, ItemStack> reward : rewards) {
+			itemRewards.add(new ItemRewardData("stardew:" + id + "/" + reward.getLeft(), reward.getRight()));
+		}
 		return new QuestData("stardew:" + id, "quest.stardew." + id, icon, Logic.AND, Logic.AND)
 			.setPreRequisites(preRequisites)
+			.setRewards(itemRewards)
 			.setTasks(listOf(new ClickTaskData("stardew:" + id + "/click")))
 			.setX(offsetQuest, xOffset)
 			.setY(offsetQuest, yOffset);

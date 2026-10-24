@@ -20,7 +20,7 @@ public class StardewQuestChapter extends ChapterData {
 
 	@Override
 	public @NotNull String getDescription() {
-		return "Expanded Farming";
+		return "Expanded farming, fishing, and cooking";
 	}
 
 	@Override
